@@ -4,19 +4,19 @@
    ============================================================ */
 
 :root {
-  --sand:      #F5EFE0;
+  --sand:      #C8D8C2;
   --sand-mid:  #E8DCC8;
-  --earth:     #C4956A;
-  --clay:      #A06B3C;
-  --bark:      #3D2B1F;
-  --night:     #1A120B;
-  --ivory:     #FAF7F2;
-  --gold:      #D4A853;
-  --sage:      #7A8C6E;
-  --ash:       #6B6259;
-  --ui-bg:     rgba(26,18,11,0.88);
-  --ui-hover:  rgba(61,43,31,0.9);
-  --ui-border: rgba(196,149,106,0.2);
+  --earth:     #4A9463;
+  --clay:      #2E5C3E;
+  --bark:      #1A3326;
+  --night:     #0D1F14;
+  --ivory:     #F7F2E8;
+  --gold:      #F5C842;
+  --sage:      #C8D8C2;
+  --ash:       #7BA88A;
+  --ui-bg:     rgba(13,31,20,.9);
+  --ui-hover:  rgba(46,92,62,.9);
+  --ui-border: rgba(74,148,99,.3);
 }
 
 /* ── RESET & BASE ── */
