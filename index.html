@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Tours — Zambia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sand:     #F5EFE0;
+      --sand-mid: #E8DCC8;
+      --earth:    #C4956A;
+      --clay:     #A06B3C;
+      --bark:     #3D2B1F;
+      --night:    #1A120B;
+      --ivory:    #FAF7F2;
+      --gold:     #D4A853;
+      --sage:     #7A8C6E;
+      --ash:      #6B6259;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--night);
+      color: var(--sand);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(196,149,106,0.2);
+      overflow: hidden;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 60px; height: 1px;
+      background: var(--gold);
+    }
+
+    .header-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--earth);
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--ivory);
+      letter-spacing: 0.01em;
+    }
+
+    header h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .header-sub {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--ash);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── DECORATIVE DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.5rem 2rem;
+      color: rgba(196,149,106,0.4);
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      max-width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(196,149,106,0.4));
+    }
+    .divider::after { background: linear-gradient(270deg, transparent, rgba(196,149,106,0.4)); }
+    .divider-icon { font-size: 0.6rem; letter-spacing: 0.3em; color: var(--earth); }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* ── TOUR CARDS ── */
+    .tours-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .tour-card {
+      background: rgba(61,43,31,0.4);
+      border: 1px solid rgba(196,149,106,0.15);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .tour-card:hover { border-color: rgba(196,149,106,0.4); }
+
+    .tour-card-inner {
+      padding: 1.75rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .tour-index {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--earth);
+      margin-bottom: 0.4rem;
+    }
+
+    .tour-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 3vw, 1.75rem);
+      font-weight: 400;
+      color: var(--ivory);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .tour-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tour-tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      border: 1px solid rgba(122,140,110,0.35);
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+    }
+
+    .tour-desc {
+      font-size: 0.82rem;
+      color: var(--ash);
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    .tour-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    /* Open in new tab button */
+    .btn-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--clay);
+      color: var(--ivory);
+      border: none;
+      border-radius: 2px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .btn-open:hover { background: var(--earth); transform: translateY(-1px); }
+    .btn-open svg { flex-shrink: 0; }
+
+    /* Preview in iframe button */
+    .btn-preview {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.25rem;
+      background: transparent;
+      color: var(--earth);
+      border: 1px solid rgba(196,149,106,0.35);
+      border-radius: 2px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .btn-preview:hover { border-color: var(--earth); color: var(--sand); transform: translateY(-1px); }
+    .btn-preview svg { flex-shrink: 0; }
+
+    /* ── IFRAME VIEWER ── */
+    .viewer-wrap {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .viewer-wrap.open {
+      max-height: 620px;
+    }
+
+    .viewer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 1.25rem;
+      background: rgba(26,18,11,0.8);
+      border-top: 1px solid rgba(196,149,106,0.15);
+    }
+
+    .viewer-bar-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      color: var(--ash);
+      cursor: pointer;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: 'Jost', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0;
+      transition: color 0.2s;
+    }
+    .btn-close:hover { color: var(--sand); }
+
+    .viewer-frame-wrap {
+      position: relative;
+      width: 100%;
+      height: 560px;
+      background: var(--night);
+    }
+
+    .viewer-frame-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .viewer-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background: var(--night);
+      color: var(--ash);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .viewer-loading.hidden { opacity: 0; }
+
+    .loader-ring {
+      width: 28px; height: 28px;
+      border: 1.5px solid rgba(196,149,106,0.15);
+      border-top-color: var(--earth);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── COMING SOON CARD ── */
+    .tour-card.coming-soon {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .tour-card.coming-soon .tour-name { color: var(--ash); }
+    .badge-soon {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: rgba(122,140,110,0.12);
+      color: var(--sage);
+      border: 1px solid rgba(122,140,110,0.2);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: rgba(107,98,89,0.5);
+      border-top: 1px solid rgba(196,149,106,0.08);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .tour-card-inner {
+        grid-template-columns: 1fr;
+      }
+      .tour-actions {
+        flex-direction: row;
+      }
+      .viewer-frame-wrap { height: 380px; }
+      .viewer-wrap.open { max-height: 450px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="header-eyebrow">Zambia · Virtual Experience</p>
+    <h1>Explore <em>Africa</em><br>from anywhere</h1>
+    <p class="header-sub">Immersive 360° virtual tours — select a property below</p>
+  </header>
+
+  <div class="divider">
+    <span class="divider-icon">&#9670;&nbsp;&nbsp;&#9670;&nbsp;&nbsp;&#9670;</span>
+  </div>
+
+  <main>
+    <div class="tours-grid">
+
+      <!-- ── TOUR 1: Safari Lodge ── -->
+      <div class="tour-card" id="card-1">
+        <div class="tour-card-inner">
+          <div class="tour-info">
+            <p class="tour-index">Tour 01</p>
+            <h2 class="tour-name">The Safari Lodge</h2>
+            <div class="tour-meta">
+              <span class="tour-tag">Premium lodge</span>
+              <span class="tour-tag">African bush</span>
+              <span class="tour-tag">3 scenes</span>
+            </div>
+            <p class="tour-desc">Arrive through the gates, explore the communal lobby with original African art, and step inside a beautifully furnished self-contained suite.</p>
+          </div>
+          <div class="tour-actions">
+            <a href="safarilodge/index.html" target="_blank" rel="noopener" class="btn-open">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 3H3a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/>
+              </svg>
+              Open tour
+            </a>
+            <button class="btn-preview" onclick="togglePreview(1, 'safarilodge/index.html', this)">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="14" height="10" rx="1.5"/><line x1="5" y1="3" x2="5" y2="13"/>
+              </svg>
+              Preview here
+            </button>
+          </div>
+        </div>
+
+        <!-- Inline iframe viewer -->
+        <div class="viewer-wrap" id="viewer-1">
+          <div class="viewer-bar">
+            <span class="viewer-bar-label">Preview — The Safari Lodge</span>
+            <button class="btn-close" onclick="togglePreview(1, 'safarilodge/index.html', document.querySelector('#card-1 .btn-preview'))">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/>
+              </svg>
+              Close
+            </button>
+          </div>
+          <div class="viewer-frame-wrap">
+            <div class="viewer-loading" id="loading-1">
+              <div class="loader-ring"></div>
+              <span>Loading tour&hellip;</span>
+            </div>
+            <iframe id="frame-1" src="" title="The Safari Lodge virtual tour" allowfullscreen
+              onload="document.getElementById('loading-1').classList.add('hidden')">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TOUR 2: Coming soon placeholder ── -->
+      <div class="tour-card coming-soon">
+        <div class="tour-card-inner">
+          <div class="tour-info">
+            <p class="tour-index">Tour 02</p>
+            <h2 class="tour-name">Riverside Lodge</h2>
+            <div class="tour-meta">
+              <span class="badge-soon">Coming soon</span>
+            </div>
+            <p class="tour-desc">Infinity pool overlooking the Zambezi. Modern stone-and-glass architecture with direct river views.</p>
+          </div>
+          <div class="tour-actions">
+            <button class="btn-open" disabled style="opacity:0.4;cursor:default">Open tour</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TOUR 3: Coming soon placeholder ── -->
+      <div class="tour-card coming-soon">
+        <div class="tour-card-inner">
+          <div class="tour-info">
+            <p class="tour-index">Tour 03</p>
+            <h2 class="tour-name">Colonial Garden House</h2>
+            <div class="tour-meta">
+              <span class="badge-soon">Coming soon</span>
+            </div>
+            <p class="tour-desc">A charming whitewashed colonial-era guest house in a lush Lusaka garden. Bougainvillea, parquet floors, and ceiling fans.</p>
+          </div>
+          <div class="tour-actions">
+            <button class="btn-open" disabled style="opacity:0.4;cursor:default">Open tour</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Zambia Virtual Tours &nbsp;&middot;&nbsp; Hosted on GitHub Pages</p>
+  </footer>
+
+  <script>
+    // Track which viewer is open
+    const openViewers = {};
+
+    function togglePreview(id, src, btn) {
+      const viewer = document.getElementById('viewer-' + id);
+      const frame  = document.getElementById('frame-' + id);
+      const loading = document.getElementById('loading-' + id);
+      const isOpen = viewer.classList.contains('open');
+
+      if (isOpen) {
+        // Close
+        viewer.classList.remove('open');
+        frame.src = '';
+        loading.classList.remove('hidden');
+        btn.innerHTML = `
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="14" height="10" rx="1.5"/><line x1="5" y1="3" x2="5" y2="13"/>
+          </svg>
+          Preview here`;
+        openViewers[id] = false;
+      } else {
+        // Open
+        viewer.classList.add('open');
+        frame.src = src;
+        btn.innerHTML = `
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/>
+          </svg>
+          Close preview`;
+        openViewers[id] = true;
+
+        // Scroll the card into view smoothly
+        setTimeout(() => {
+          viewer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    }
+  </script>
+
+</body>
+</html>
