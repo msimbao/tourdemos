@@ -290,7 +290,7 @@
     height: 56px;
     margin-left: -28px;
     margin-top: -28px;
-    opacity: 0.85;
+    opacity: 1;
     -webkit-transition: opacity 0.25s;
     transition: opacity 0.25s;
   }
@@ -359,12 +359,14 @@
   }
   .info-hotspot.visible { opacity: 1; }
   
+  /* ── Hotspot trigger button: solid black, crisp gold border ── */
   .info-hotspot .info-hotspot-header {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: rgba(201,168,76,0.15);
-    border: 1px solid rgba(201,168,76,0.4);
+    background: #0A0A0A;
+    border: 2px solid var(--color-gold);
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.2), 0 2px 12px rgba(0,0,0,0.8);
     cursor: pointer;
     -webkit-transition: width 0.3s ease-in-out 0.5s, border-radius 0.3s ease-in-out 0.5s;
     transition: width 0.3s ease-in-out 0.5s, border-radius 0.3s ease-in-out 0.5s;
@@ -379,10 +381,13 @@
     transition: width 0.3s ease-in-out, border-radius 0.3s ease-in-out;
   }
   
+  /* ── Header bar when expanded/visible: stays solid black ── */
   .desktop .info-hotspot.visible .info-hotspot-header,
   .desktop.no-touch .info-hotspot.visible .info-hotspot-header:hover {
     width: 260px;
     border-radius: var(--radius-sm) 0 0 0;
+    background: #0A0A0A;
+    border-color: var(--color-gold);
     -webkit-transition: width 0.3s ease-in-out, border-radius 0.3s ease-in-out;
     transition: width 0.3s ease-in-out, border-radius 0.3s ease-in-out;
   }
@@ -441,7 +446,7 @@
     width: 40px;
     border-top-right-radius: var(--radius-sm);
     background: rgba(201,168,76,0.2);
-    border: 1px solid rgba(201,168,76,0.3);
+    border: 1px solid var(--color-gold);
     visibility: hidden;
     -ms-transform: perspective(200px) rotateY(90deg);
     -webkit-transform: perspective(200px) rotateY(90deg);
@@ -464,6 +469,7 @@
   
   .info-hotspot .info-hotspot-close-icon { width: 70%; height: 70%; margin: 15%; filter: brightness(0) invert(1); }
   
+  /* ── Info panel body: fully opaque, strong gold border ── */
   .info-hotspot .info-hotspot-text {
     position: absolute;
     width: 300px;
@@ -472,11 +478,12 @@
     top: 40px;
     left: 0;
     padding: 14px 16px;
-    background: rgba(10,10,10,0.92);
-    border: 1px solid rgba(201,168,76,0.2);
+    background: #0A0A0A;
+    border: 1px solid var(--color-gold);
     border-top: none;
     border-bottom-right-radius: var(--radius-sm);
     border-bottom-left-radius: var(--radius-sm);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.9);
     overflow-y: auto;
     visibility: hidden;
     font-family: var(--font-body);
@@ -515,7 +522,7 @@
     width: 100%; height: 100%;
     overflow: hidden;
     z-index: 11000 !important;
-    background: rgba(0,0,0,0.75);
+    background: rgba(0,0,0,0.85);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     line-height: 1.2em;
@@ -532,6 +539,7 @@
     transition: opacity 0.2s ease-in-out, visibility 0s 0s;
   }
   
+  /* ── Mobile modal header: solid black, gold border ── */
   .info-hotspot-modal .info-hotspot-header {
     position: absolute;
     top: 60px;
@@ -539,8 +547,8 @@
     right: 16px;
     width: auto;
     height: 52px;
-    background: rgba(10,10,10,0.95);
-    border: 1px solid rgba(201,168,76,0.3);
+    background: #0A0A0A;
+    border: 2px solid var(--color-gold);
     border-bottom: none;
     border-radius: var(--radius-md) var(--radius-md) 0 0;
     opacity: 0;
@@ -594,13 +602,14 @@
     width: 52px;
     height: 52px;
     background: rgba(201,168,76,0.15);
-    border-left: 1px solid rgba(201,168,76,0.2);
+    border-left: 1px solid var(--color-gold);
     cursor: pointer;
     border-radius: 0 var(--radius-md) 0 0;
   }
   
   .info-hotspot-modal .info-hotspot-close-icon { width: 70%; height: 70%; margin: 15%; filter: brightness(0) invert(1); }
   
+  /* ── Mobile modal text body: fully opaque, gold border ── */
   .info-hotspot-modal .info-hotspot-text {
     position: absolute;
     top: 112px;
@@ -608,10 +617,11 @@
     left: 16px;
     right: 16px;
     padding: 16px 20px;
-    background: rgba(10,10,10,0.95);
-    border: 1px solid rgba(201,168,76,0.2);
+    background: #0A0A0A;
+    border: 2px solid var(--color-gold);
     border-top: none;
     border-radius: 0 0 var(--radius-md) var(--radius-md);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.95);
     overflow-y: auto;
     font-family: var(--font-body);
     font-size: 14px;
