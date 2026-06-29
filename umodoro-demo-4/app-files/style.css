@@ -290,7 +290,7 @@
     height: 56px;
     margin-left: -28px;
     margin-top: -28px;
-    opacity: 1;
+    opacity: 0.85;
     -webkit-transition: opacity 0.25s;
     transition: opacity 0.25s;
   }
@@ -359,19 +359,13 @@
   }
   .info-hotspot.visible { opacity: 1; }
   
-  /* ── Hotspot trigger button: solid black, crisp gold border ── */
   .info-hotspot .info-hotspot-header {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #0A0A0A;
-    border: 1px solid var(--color-gold);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.4);
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
     -webkit-transition: width 0.3s ease-in-out 0.5s, border-radius 0.3s ease-in-out 0.5s;
     transition: width 0.3s ease-in-out 0.5s, border-radius 0.3s ease-in-out 0.5s;
   }
@@ -385,33 +379,17 @@
     transition: width 0.3s ease-in-out, border-radius 0.3s ease-in-out;
   }
   
-  /* ── Header bar when expanded/visible: stays solid black ── */
   .desktop .info-hotspot.visible .info-hotspot-header,
   .desktop.no-touch .info-hotspot.visible .info-hotspot-header:hover {
     width: 260px;
     border-radius: var(--radius-sm) 0 0 0;
-    background: #0A0A0A;
-    border-color: var(--color-gold);
     -webkit-transition: width 0.3s ease-in-out, border-radius 0.3s ease-in-out;
     transition: width 0.3s ease-in-out, border-radius 0.3s ease-in-out;
   }
   
-  .info-hotspot .info-hotspot-icon-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .mobile .info-hotspot .info-hotspot-icon-wrapper {
-    width: 50px;
-    height: 50px;
-  }
-  .info-hotspot .info-hotspot-icon { width: 55%; height: 55%; margin: 0; filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(5deg); }
+  .info-hotspot .info-hotspot-icon-wrapper { width: 40px; height: 40px; }
+  .mobile .info-hotspot .info-hotspot-icon-wrapper { width: 50px; height: 50px; }
+  .info-hotspot .info-hotspot-icon { width: 90%; height: 90%; margin: 5%; filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(5deg); }
   
   .info-hotspot .info-hotspot-title-wrapper {
     position: absolute;
@@ -462,9 +440,8 @@
     height: 40px;
     width: 40px;
     border-top-right-radius: var(--radius-sm);
-    background: #0A0A0A;
-    border: 1px solid var(--color-gold);
-    border-left: none;
+    background: rgba(201,168,76,0.2);
+    border: 1px solid rgba(201,168,76,0.3);
     visibility: hidden;
     -ms-transform: perspective(200px) rotateY(90deg);
     -webkit-transform: perspective(200px) rotateY(90deg);
@@ -487,7 +464,6 @@
   
   .info-hotspot .info-hotspot-close-icon { width: 70%; height: 70%; margin: 15%; filter: brightness(0) invert(1); }
   
-  /* ── Info panel body: fully opaque, strong gold border ── */
   .info-hotspot .info-hotspot-text {
     position: absolute;
     width: 300px;
@@ -496,17 +472,16 @@
     top: 40px;
     left: 0;
     padding: 14px 16px;
-    background: #0A0A0A;
-    border: 1px solid var(--color-gold);
+    background: rgba(10,10,10,0.92);
+    border: 1px solid rgba(201,168,76,0.2);
     border-top: none;
     border-bottom-right-radius: var(--radius-sm);
     border-bottom-left-radius: var(--radius-sm);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.9);
     overflow-y: auto;
     visibility: hidden;
     font-family: var(--font-body);
-    font-size: 15px;
-    line-height: 1.65;
+    font-size: 13px;
+    line-height: 1.6;
     color: var(--color-white-dim);
     -ms-transform: perspective(200px) rotateX(-89.999deg);
     -webkit-transform: perspective(200px) rotateX(-89.999deg);
@@ -540,7 +515,7 @@
     width: 100%; height: 100%;
     overflow: hidden;
     z-index: 11000 !important;
-    background: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.75);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     line-height: 1.2em;
@@ -557,7 +532,6 @@
     transition: opacity 0.2s ease-in-out, visibility 0s 0s;
   }
   
-  /* ── Mobile modal header: solid black, gold border ── */
   .info-hotspot-modal .info-hotspot-header {
     position: absolute;
     top: 60px;
@@ -565,8 +539,8 @@
     right: 16px;
     width: auto;
     height: 52px;
-    background: #0A0A0A;
-    border: 1px solid var(--color-gold);
+    background: rgba(10,10,10,0.95);
+    border: 1px solid rgba(201,168,76,0.3);
     border-bottom: none;
     border-radius: var(--radius-md) var(--radius-md) 0 0;
     opacity: 0;
@@ -619,15 +593,14 @@
     right: 0;
     width: 52px;
     height: 52px;
-    background: #0A0A0A;
-    border-left: 1px solid var(--color-gold);
+    background: rgba(201,168,76,0.15);
+    border-left: 1px solid rgba(201,168,76,0.2);
     cursor: pointer;
     border-radius: 0 var(--radius-md) 0 0;
   }
   
   .info-hotspot-modal .info-hotspot-close-icon { width: 70%; height: 70%; margin: 15%; filter: brightness(0) invert(1); }
   
-  /* ── Mobile modal text body: fully opaque, gold border ── */
   .info-hotspot-modal .info-hotspot-text {
     position: absolute;
     top: 112px;
@@ -635,11 +608,10 @@
     left: 16px;
     right: 16px;
     padding: 16px 20px;
-    background: #0A0A0A;
-    border: 1px solid var(--color-gold);
+    background: rgba(10,10,10,0.95);
+    border: 1px solid rgba(201,168,76,0.2);
     border-top: none;
     border-radius: 0 0 var(--radius-md) var(--radius-md);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.95);
     overflow-y: auto;
     font-family: var(--font-body);
     font-size: 14px;
