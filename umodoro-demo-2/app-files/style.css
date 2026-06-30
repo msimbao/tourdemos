@@ -422,7 +422,7 @@
     display: inline-block;
     vertical-align: middle;
     font-family: var(--font-label);
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -480,7 +480,7 @@
     overflow-y: auto;
     visibility: hidden;
     font-family: var(--font-body);
-    font-size: 13px;
+    font-size: 20px;
     line-height: 1.6;
     color: var(--color-white-dim);
     -ms-transform: perspective(200px) rotateX(-89.999deg);

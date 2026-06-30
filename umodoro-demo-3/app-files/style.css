@@ -576,7 +576,7 @@
     display: inline-block;
     vertical-align: middle;
     font-family: var(--font-label);
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -614,7 +614,7 @@
     border-radius: 0 0 var(--radius-md) var(--radius-md);
     overflow-y: auto;
     font-family: var(--font-body);
-    font-size: 14px;
+    font-size: 20px;
     line-height: 1.7;
     color: var(--color-white-dim);
     opacity: 0;
